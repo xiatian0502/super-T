@@ -37,7 +37,7 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             git add *.txt *.m3u
             git commit -m "Automatic update"
-            git push origin main
+            git push origin main --force
           else
             echo "No changes detected, skipping commit."
           fi
