@@ -3,6 +3,7 @@ name: update m3u
 on:
   schedule:
     - cron: '0 */12 * * *' # 每隔12小时运行一次
+  workflow_dispatch: # 添加这一行来允许手动触发
 
 jobs:
   build:
@@ -31,4 +32,3 @@ jobs:
         git add mytvfree.m3u
         git commit -m "Update mytvfree.m3u" -a
         git push
-
