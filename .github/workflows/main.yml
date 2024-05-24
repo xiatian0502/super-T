@@ -1,40 +1,34 @@
-name: genngxinzubo
+name: Update M3U
+
 on:
-  workflow_dispatch:
- 
+  schedule:
+    - cron: '0 */12 * * *' # 每隔12小时运行一次
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Delete workflow runs
-        uses: Mattraks/delete-workflow-runs@v2
-        with:
-          token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          retain_days: 2
-          keep_minimum_runs: 6 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.x
-      - name: Install dependencies
-        run: pip install opencv-python requests 
-      - name: Run gengxinip
-        run: python ${{ github.workspace }}/gengxinip.py
-     
-      
-   - name: Commit results
-     run: |
-       git config --local user.email "gxia7466@gmail.com"
-       git config --local user.name "xiatian0502"
-       git pull --rebase origin main
-       if [ -n "$(git status --porcelain)" ]; then
-         git add *.txt *.m3u
-         git commit -m "Automatic update"
-         git push
-       else
-         echo "No changes detected, skipping commit."
-       fi
-   
+    - uses: actions/checkout@v2 # 获取仓库的代码
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        # 如果你的脚本需要其他的Python库，你可以在这里使用pip install命令安装
+
+    - name: Run script
+      run: python mytvsp.py # 运行你的Python脚本
+
+    - name: Commit and push
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add mytvfree.m3u
+        git commit -m "Update mytvfree.m3u" -a
+        git push
+
