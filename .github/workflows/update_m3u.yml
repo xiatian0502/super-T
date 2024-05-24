@@ -15,7 +15,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.2  # 确保Python版本是最新的
+        python-version: 3.9.6  # 确保Python版本是最新的
 
     - name: Install dependencies
       run: |
