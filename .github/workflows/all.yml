@@ -41,7 +41,7 @@ jobs:
             git clone https://xiatian0502:${{ secrets.PUBLIC0PLAYLIST }}@github.com/xiatian0502/public-playlist.git
             cd public-playlist
             git checkout -b update-mytvfree || git checkout update-mytvfree
-            cp ../mytvfree.m3u .
+            cp ${{ github.workspace }}/mytvfree.m3u .
 
         - name: Configure git for target repo
           working-directory: public-playlist
@@ -49,38 +49,28 @@ jobs:
             git config --local user.email "gxia7466@gmail.com"
             git config --local user.name "xiatian0502"
 
-        - name: Stash uncommitted changes
+        - name: Stage changes before pull
           working-directory: public-playlist
-          run: git stash || echo "Nothing to stash"
+          run: |
+            git add . || echo "Nothing to add"
 
         - name: Pull and rebase changes (target repo)
           working-directory: public-playlist
-          run: git pull origin update-mytvfree --rebase
+          run: |
+            git pull origin update-mytvfree --rebase || (git rebase --abort && git pull origin update-mytvfree --rebase)
 
-        - name: Apply stashed changes
-          working-directory: public-playlist
-          run: git stash pop || echo "Nothing to apply"
-
-        - name: Resolve conflicts
+        - name: Resolve conflicts if any
           working-directory: public-playlist
           run: |
-            if [[ $(git ls-files -u | wc -l) -gt 0 ]]; then
-              git checkout --theirs mytvfree.m3u
-              git add mytvfree.m3u
-              git commit -m "Resolve conflict in mytvfree.m3u with theirs"
-            fi
+            git checkout --theirs mytvfree.m3u || echo "No conflicts to resolve"
+            git add mytvfree.m3u --force
 
-        - name: Copy and commit changes
+        - name: Commit merge resolution
           working-directory: public-playlist
           run: |
-            git add mytvfree.m3u
-            git status  # Add this line to debug
-            git commit -m 'Update mytvfree.m3u' || echo "No changes to commit"
+            git commit -m "Resolved merge conflict in mytvfree.m3u" || true
 
-        - name: Merge update-mytvfree to main
+        - name: Push changes
           working-directory: public-playlist
           run: |
-            git checkout main
-            git merge update-mytvfree
-            git push origin main
-            git log -1  # Add this line to debug the last commit
+            git push origin update-mytvfree -f || true
