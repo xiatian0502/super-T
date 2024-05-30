@@ -1,8 +1,6 @@
 name: all
+
 on:
-   #push:
-     #paths:
-      #- 'gengxinip.py'
    schedule:
         - cron: '0 */6 * * *'
    workflow_dispatch:
@@ -22,8 +20,6 @@ jobs:
       - name: Install dependencies
         run: pip install opencv-python requests 
         
-      ##- name: Run all
-       ## run: python ${{ github.workspace }}/all.py
       - name: Run mytv
         run: python ${{ github.workspace }}/mytvsp.py
      
@@ -38,3 +34,16 @@ jobs:
           else
             echo "No changes detected, skipping commit."
           fi
+
+      - name: Clone target repo
+        run: |
+          git clone https://xiatian0502:${{ secrets.PUBLIC0PLAYLIST }}@github.com/xiatian0502/public-playlist.git
+          cp mytvfree.m3u public-playlist/
+          cd public-playlist
+          git checkout -b update-mytvfree || git checkout update-mytvfree
+
+      - name: Copy and commit
+        run: |
+          git add mytvfree.m3u
+          git commit -m 'Update mytvfree.m3u'
+          git push origin update-mytvfree
