@@ -1,61 +1,57 @@
 name: all
 
 on:
-   schedule:
+    schedule:
         - cron: '0 */6 * * *'
-   workflow_dispatch:
+    workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    build:
+        runs-on: ubuntu-latest
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.x
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: pip install opencv-python requests
+        - name: Set up Python
+          uses: actions/setup-python@v2
+          with:
+              python-version: '3.x'
 
-      - name: Run mytv
-        run: python ${{ github.workspace }}/mytvsp.py
+        - name: Install dependencies
+          run: pip install opencv-python requests
 
-      - name: Configure Git Identity
-        run: |
-          git config --local user.email "gxia7466@gmail.com"
-          git config --local user.name "xiatian0502"
+        - name: Run my script
+          run: python ${{ github.workspace }}/mytvsp.py
 
-      - name: Commit results
-        run: |
-          git fetch --unshallow
-          git pull origin main --rebase
-          if [ -n "$(git status --porcelain)" ]; then
+        - name: Configure git
+          run: |
+            git config --local user.email "gxia7466@gmail.com"
+            git config --local user.name "xiatian0502"
+
+        - name: Commit and push changes if any
+          run: |
             git add *.txt *.m3u
-            git commit -m "Automatic update"
+            git commit -m "Automatic update" || echo "No changes to commit"
+            git pull origin main --rebase
             git push origin main
-          else
-            echo "No changes detected, skipping commit."
-          fi
 
-      - name: Clone target repo
-        run: |
-          git clone https://xiatian0502:${{ secrets.PUBLIC0PLAYLIST }}@github.com/xiatian0502/public-playlist.git
-          cp mytvfree.m3u public-playlist/
-          cd public-playlist
-          git checkout -b update-mytvfree || git checkout update-mytvfree
+        - name: Clone target repo
+          run: |
+            git clone https://xiatian0502:${{ secrets.PUBLIC0PLAYLIST }}@github.com/xiatian0502/public-playlist.git
+            cp mytvfree.m3u public-playlist/
+            cd public-playlist
+            git checkout -b update-mytvfree || git checkout update-mytvfree
 
-      - name: Configure Git Identity for target repo
-        working-directory: public-playlist
-        run: |
-          git config --local user.email "gxia7466@gmail.com"
-          git config --local user.name "xiatian0502"
+        - name: Configure git for target repo
+          working-directory: public-playlist
+          run: |
+            git config --local user.email "gxia7466@gmail.com"
+            git config --local user.name "xiatian0502"
 
-      - name: Copy and commit to target repo
-        working-directory: public-playlist
-        run: |
-          git add mytvfree.m3u
-          git commit -m 'Update mytvfree.m3u'
-          git push origin update-mytvfree
+        - name: Copy and commit
+          working-directory: public-playlist
+          run: |
+            git add mytvfree.m3u
+            git commit -m 'Update mytvfree.m3u' || echo "No changes to commit"
+            git push origin update-mytvfree
