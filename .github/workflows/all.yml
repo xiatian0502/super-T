@@ -43,6 +43,7 @@ jobs:
           git checkout -b update-mytvfree || git checkout update-mytvfree
 
       - name: Copy and commit
+        working-directory: public-playlist
         run: |
           git add mytvfree.m3u
           git commit -m 'Update mytvfree.m3u'
