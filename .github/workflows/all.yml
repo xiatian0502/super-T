@@ -42,6 +42,12 @@ jobs:
           cd public-playlist
           git checkout -b update-mytvfree || git checkout update-mytvfree
 
+      - name: Configure Git Identity
+        working-directory: public-playlist
+        run: |
+          git config --local user.email "jaccong@163.com"
+          git config --local user.name "jaccong"
+
       - name: Copy and commit
         working-directory: public-playlist
         run: |
