@@ -38,7 +38,7 @@ jobs:
 
     - name: Clone target repo
       run: |
-        git clone https://xiatian0502:${{ secrets.PUBLIC0PLAYLIST }}@github.com/xiatian0502/public-playlist.git
+        git clone https://xiatian0502:${{ secrets.GITHUB_TOKEN }}@github.com/xiatian0502/public-playlist.git
         cd public-playlist
         git checkout -b update-mytvfree || git checkout update-mytvfree
         cp ../mytvfree.m3u .
@@ -71,7 +71,7 @@ jobs:
         if git ls-files -u | grep mytvfree.m3u; then
           git checkout --theirs mytvfree.m3u
           git add mytvfree.m3u
-          git commit -m "Resolved conflict in mytvfree.m3u with theirs"
+          git commit -m "Resolved conflict in mytvfree.m3u with theirs" || echo "No changes to commit"
         fi
 
     - name: Commit and push changes
@@ -92,7 +92,14 @@ jobs:
     - name: Merge update-mytvfree into main
       working-directory: public-playlist
       run: |
-        git merge update-mytvfree || (git merge --abort && git checkout update-mytvfree && git merge main)
+        git merge update-mytvfree || (
+          git merge --abort && 
+          git checkout --theirs mytvfree.m3u && 
+          git add mytvfree.m3u && 
+          git commit -m "Resolved conflict in mytvfree.m3u with theirs" && 
+          git checkout main && 
+          git merge update-mytvfree
+        )
       
     - name: Push to main branch
       working-directory: public-playlist
