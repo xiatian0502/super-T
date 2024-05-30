@@ -32,7 +32,7 @@ jobs:
     - name: Commit_and_push_changes_if_any
       run: |
         git add *.txt *.m3u
-        git commit -m "Automatic update"  echo "No changes to commit"
+        git commit -m "Automatic update" || echo "No changes to commit"
         git pull origin main --rebase
         git push origin main
 
@@ -40,7 +40,7 @@ jobs:
       run: |
         git clone https://xiatian0502:${{ secrets.PUBLIC0PLAYLIST }}@github.com/xiatian0502/public-playlist.git
         cd public-playlist
-        git checkout -b update-mytvfree  git checkout update-mytvfree
+        git checkout -b update-mytvfree || git checkout update-mytvfree
         cp ../mytvfree.m3u .
 
     - name: Configure_git_for_target_repo
@@ -51,7 +51,7 @@ jobs:
 
     - name: Stash_uncommitted_changes
       working-directory: public-playlist
-      run: git stash  echo "Nothing to stash"
+      run: git stash || echo "Nothing to stash"
 
     - name: Pull_and_rebase_changes_target_repo
       working-directory: public-playlist
@@ -59,7 +59,7 @@ jobs:
 
     - name: Apply_stashed_changes
       working-directory: public-playlist
-      run: git stash pop  echo "Nothing to apply"
+      run: git stash pop || echo "Nothing to apply"
 
     - name: Resolve_conflicts_if_any
       working-directory: public-playlist
