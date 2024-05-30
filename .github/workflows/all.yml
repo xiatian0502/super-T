@@ -74,5 +74,7 @@ jobs:
           working-directory: public-playlist
           run: |
             git add mytvfree.m3u
+            git status  # Add this line to debug
             git commit -m 'Update mytvfree.m3u' || echo "No changes to commit"
             git push origin update-mytvfree
+            git log -1  # Add this line to debug the last commit
