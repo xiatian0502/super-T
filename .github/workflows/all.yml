@@ -76,5 +76,11 @@ jobs:
             git add mytvfree.m3u
             git status  # Add this line to debug
             git commit -m 'Update mytvfree.m3u' || echo "No changes to commit"
-            git push origin update-mytvfree
+
+        - name: Merge update-mytvfree to main
+          working-directory: public-playlist
+          run: |
+            git checkout main
+            git merge update-mytvfree
+            git push origin main
             git log -1  # Add this line to debug the last commit
