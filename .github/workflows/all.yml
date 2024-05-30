@@ -61,6 +61,15 @@ jobs:
           working-directory: public-playlist
           run: git stash pop || echo "Nothing to apply"
 
+        - name: Resolve conflicts
+          working-directory: public-playlist
+          run: |
+            if [[ $(git ls-files -u | wc -l) -gt 0 ]]; then
+              git checkout --theirs mytvfree.m3u
+              git add mytvfree.m3u
+              git commit -m "Resolve conflict in mytvfree.m3u with theirs"
+            fi
+
         - name: Copy and commit changes
           working-directory: public-playlist
           run: |
