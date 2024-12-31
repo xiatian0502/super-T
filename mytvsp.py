@@ -68,42 +68,6 @@ CHANNEL_LIST = {
         'logo': 'https://raw.githubusercontent.com/wanglindl/TVlogo/main/img/Phoenix3.png',
         'license_key': 'https://vercel-php-clearkey-hex-base64-json.vercel.app/api/results.php?keyid=cde62e1056eb3615dab7a3efd83f5eb4&key=b8685fbecf772e64154630829cf330a3'
     },
-    'EVT3': {
-        'name': 'myTV SUPER 直播足球3台',
-        'license': '84f456002b780253dab5534e9713323c:65aeb769264f41037cec607813e91bae',
-        'logo': 'https://assets.livednow.com/logo/myTV-SUPER-Football-3.png',
-        'license_key': 'https://vercel-php-clearkey-hex-base64-json.vercel.app/api/results.php?keyid=84f456002b780253dab5534e9713323c&key=65aeb769264f41037cec607813e91bae'
-    },
-    'EVT4': {
-        'name': 'myTV SUPER 直播足球4台',
-        'license': '848d6d82c14ffd12adf4a7b49afdc978:3221125831a2f980139c34b35def3b0d',
-        'logo': 'https://assets.livednow.com/logo/myTV-SUPER-Football-4.png',
-        'license_key': 'https://vercel-php-clearkey-hex-base64-json.vercel.app/api/results.php?keyid=848d6d82c14ffd12adf4a7b49afdc978&key=3221125831a2f980139c34b35def3b0d'
-    },
-    'EVT5': {
-        'name': 'myTV SUPER 直播足球5台',
-        'license': '54700d7a381b80ae395a312e03a9abeb:7c68d289628867bf691b42e90a50d349',
-        'logo': 'https://assets.livednow.com/logo/myTV-SUPER-Football-5.png',
-        'license_key': 'https://vercel-php-clearkey-hex-base64-json.vercel.app/api/results.php?keyid=54700d7a381b80ae395a312e03a9abeb&key=7c68d289628867bf691b42e90a50d349'
-    },
-    'EVT6': {
-        'name': 'myTV SUPER 直播足球6台',
-        'license': 'e069fc056280e4caa7d0ffb99024c05a:d3693103f232f28b4781bbc7e499c43a',
-        'logo': 'https://assets.livednow.com/logo/myTV-SUPER-Football-6.png',
-        'license_key': 'https://vercel-php-clearkey-hex-base64-json.vercel.app/api/results.php?keyid=e069fc056280e4caa7d0ffb99024c05a&key=d3693103f232f28b4781bbc7e499c43a'
-    },
-    'CCCM': {
-        'name': '天映經典頻道',
-        'license': '627b6ca150887912bec47ae4a9b85269:2bf49b2105d20544a6db89c0577b9802',
-        'logo': 'https://assets.livednow.com/logo/天映經典頻道.png',
-        'license_key': 'https://vercel-php-clearkey-hex-base64-json.vercel.app/api/results.php?keyid=627b6ca150887912bec47ae4a9b85269&key=2bf49b2105d20544a6db89c0577b9802'
-    },
-    'CMAM': {
-        'name': '美亞電影台-HK',
-        'license': 'c5d6f2afbd6b276312b0471a653828e1:ecbbb4a3ffa2200ae69058e20e71e91b',
-        'logo': 'https://assets.livednow.com/logo/美亞電影台-HK.png',
-        'license_key': 'https://vercel-php-clearkey-hex-base64-json.vercel.app/api/results.php?keyid=c5d6f2afbd6b276312b0471a653828e1&key=ecbbb4a3ffa2200ae69058e20e71e91b'
-    },
     'EVT1': {
         'name': 'myTV SUPER直播足球1台',
         'license': 'e8ca7903e25450d85cb32b3057948522:d5db5c03608f5f6c8a382c6abcb829e4',
