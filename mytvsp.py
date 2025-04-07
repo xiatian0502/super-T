@@ -93,6 +93,12 @@ CHANNEL_LIST = {
         'logo': 'https://assets.livednow.com/logo/myTV-SUPER-Football-6.png',
         'license_key': 'https://vercel-php-clearkey-hex-base64-json.vercel.app/api/results.php?keyid=e069fc056280e4caa7d0ffb99024c05a&key=d3693103f232f28b4781bbc7e499c43a'
     },
+    'CJAZ': {
+        'name': '半島電視台英語頻道',
+        'license': '80c76105d3ae35dfe25f939d1fb83383:6d76e7ba039773bced47d78e6de4fcf0',
+        'logo': 'https://assets.livednow.com/logo/半島電視台英語頻道.png',
+        'license_key': 'https://vercel-php-clearkey-hex-base64-json.vercel.app/api/results.php?keyid=80c76105d3ae35dfe25f939d1fb83383&key=6d76e7ba039773bced47d78e6de4fcf0'
+    }, 
     'CCCM': {
         'name': '天映經典頻道',
         'license': '627b6ca150887912bec47ae4a9b85269:2bf49b2105d20544a6db89c0577b9802',
